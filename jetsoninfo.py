@@ -44,21 +44,30 @@ if os.path.exists('/etc/nv_tegra_release'):
             # Example: '# R24 (release)'
             l4tRelease=entry.split(' ')[1]
             l4tRelease=filter(str.isdigit,l4tRelease)
-            print ' ' + entry            
         elif 'REVISION' in entry:
             # Example: 'REVISION: 2.1'
             l4tRevision=entry.split(' ')[2]
-            print entry
         elif 'BOARD' in entry:
             # Example: 'BOARD: t210ref'
-            board=entry
-            print entry
-
-    print ' L4T ' + l4tRelease + '.' + l4tRevision   
-    # print l4tVersionInfo
+            board=entry.split(' ')[2]
+    print ' L4T ' + l4tRelease + '.' + l4tRevision 
+    print ' Board: ' + board  
 else:
     print terminalColors.FAIL + "Error: Unable to find L4T Version"  + terminalColors.ENDC
     print "Reason: Unable to find file /etc/nv_tegra_release"
+
+# Ubuntu version
+if os.path.exists('/etc/os-release'):
+    with open("/etc/os-release","r") as ubuntuVersionFile:
+        ubuntuVersionFileText=ubuntuVersionFile.read()
+    for line in ubuntuVersionFileText.splitlines(): 
+        if 'PRETTY_NAME' in line: 
+            # PRETTY_NAME="Ubuntu 16.04 LTS"
+            ubuntuRelease=line.split('"')[1]
+            print ' ' + ubuntuRelease            
+else:
+    print terminalColors.FAIL + "Error: Unable to find Ubuntu Version"  + terminalColors.ENDC
+    print "Reason: Unable to find file /etc/os-release"
 
 
 
