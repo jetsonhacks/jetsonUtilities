@@ -27,8 +27,7 @@ if os.path.exists('/proc/cpuinfo'):
                 foundHardware = True
                 break 
     if foundHardware == False :
-        print terminalColors.FAIL + "Error: Unable to find Hardware entry" + terminalColors.ENDC
-        print "Reason: Unable to find in file /proc/cpuinfo"
+        print terminalColors.WARNING + " Hardware Model Name not available" + terminalColors.ENDC
 else:
     print terminalColors.FAIL + "Error: Unable to find hardware information" + terminalColors.ENDC
     print "Reason: Unable to find file /proc/cpuinfo"
