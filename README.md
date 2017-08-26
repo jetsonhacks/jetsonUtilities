@@ -10,6 +10,10 @@ The Python script jetsoninfo.py will list the hardware, version of L4T that is r
 
 $ python jetsonInfo.py
 
+or
+
+$ ./jetsonInfo.py
+
 The hardware designator is derived from the file: '/proc/cpuinfo'
 
 The L4T version is derived from the file: '/etc/nv_tegra_release'
