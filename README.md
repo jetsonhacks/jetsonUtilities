@@ -1,3 +1,6 @@
+# jetsonUtilities
+This repository holds utilities for working with NVIDIA Jetson Development Kit
+
 # jetsonInfo
 Get information about the NVIDIA Jetson OS environment
 
