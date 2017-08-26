@@ -2,7 +2,7 @@
 This repository holds utilities for working with NVIDIA Jetson Development Kit
 
 # jetsonInfo
-Get information about the NVIDIA Jetson OS environment
+Get information about the NVIDIA Jetson OS environment on NVIDIA Jetson Development Kits (TK1, TX1, TX2)
 
 The information about the NVIDIA Jetson Development Kit operating system is spread over a few files. This is a handy tool to use for reference.
 
