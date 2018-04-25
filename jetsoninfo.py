@@ -10,27 +10,22 @@ class terminalColors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
-  
-# Print out the hardware information, e.g. jetson_tx1
-if os.path.exists('/proc/cpuinfo'):
-    with open("/proc/cpuinfo","r") as cpuInfoFile:
-        cpuInfoFileText=cpuInfoFile.read()
-    # print cpuInfoFileText
-    foundHardware = False
-    for line in cpuInfoFileText.splitlines():
-        if ':' in line:
-            left, right = line.split(':', 1)
-            left = left.strip().lower()
-            right = right.strip()
-            if left == "hardware" and len(right) > 0:
-                print " Hardware: " + right
-                foundHardware = True
-                break 
-    if foundHardware == False :
-        print terminalColors.WARNING + " Hardware Model Name not available" + terminalColors.ENDC
-else:
-    print terminalColors.FAIL + "Error: Unable to find hardware information" + terminalColors.ENDC
-    print "Reason: Unable to find file /proc/cpuinfo"
+
+import pprint
+import subprocess
+
+command = ['bash', '-c', 'source jetson/jetson_variables && env']
+
+proc = subprocess.Popen(command, stdout = subprocess.PIPE)
+
+for line in proc.stdout:
+  (key, _, value) = line.partition("=")
+  os.environ[key] = value
+
+proc.communicate()
+
+# Jetson Model
+print " NVIDIA Jetson " + os.environ["JETSON_BOARD"].strip() 
 
 #L4T Version
 if os.path.exists('/etc/nv_tegra_release'):
@@ -49,7 +44,7 @@ if os.path.exists('/etc/nv_tegra_release'):
         elif 'BOARD' in entry:
             # Example: 'BOARD: t210ref'
             board=entry.split(' ')[2]
-    print ' L4T ' + l4tRelease + '.' + l4tRevision 
+    print ' L4T ' + l4tRelease + '.' + l4tRevision + " [ JetPack " +os.environ["JETSON_JETPACK"].strip()+" ]"
     print ' Board: ' + board  
 else:
     print terminalColors.FAIL + "Error: Unable to find L4T Version"  + terminalColors.ENDC
@@ -80,4 +75,4 @@ else:
     print terminalColors.FAIL + "Error: Unable to find Linux kernel version"  + terminalColors.ENDC
     print "Reason: Unable to find file /proc/version"
 
- 
+print " CUDA " + os.environ["JETSON_CUDA"].strip() 
