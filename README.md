@@ -21,3 +21,14 @@ The L4T version is derived from the file: '/etc/nv_tegra_release'
 The Ubuntu version is derived from the file: '/etc/os-release'
 
 The Linux kernel version is derived from the file: '/proc/version'
+
+Release Notes:
+
+July, 2018
+* v1.0
+* Add support for JetPack 3.2.1 (L4T 28.2.1)
+
+Script jetson_variables is from jetson_easy
+Copyright (c) 2015-2018 Raffaello Bonghi (jetson_easy)
+See license for jetson_easy in scripts folder
+

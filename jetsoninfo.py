@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # MIT License
-# Copyright (c) 2017 Jetsonhacks
+# Copyright (c) 2017-2018 Jetsonhacks
 # Please see accompanying license information
 
 import os,sys
@@ -14,7 +14,7 @@ class terminalColors:
 import pprint
 import subprocess
 
-command = ['bash', '-c', 'source jetson/jetson_variables && env']
+command = ['bash', '-c', 'source scripts/jetson_variables && env']
 
 proc = subprocess.Popen(command, stdout = subprocess.PIPE)
 
