@@ -28,7 +28,9 @@ July, 2018
 * v1.0
 * Add support for JetPack 3.2.1 (L4T 28.2.1)
 
-Script jetson_variables is from jetson_easy
-Copyright (c) 2015-2018 Raffaello Bonghi (jetson_easy)
+The shell script jetson_variables is from jetson_easy: https://github.com/rbonghi/jetson_easy
+
+Copyright (c) 2015-2018 Raffaello Bonghi
+
 See license for jetson_easy in scripts folder
 
