@@ -71,6 +71,8 @@ if [ -f /etc/nv_tegra_release ]; then
         case $JETSON_L4T in
             "31.0.1")
                     JETSON_JETPACK="4.0 DP" ;;
+            "31.0.2")
+                    JETSON_JETPACK="4.1 DP" ;;
             *)
                JETSON_JETPACK="UNKNOWN" ;;
         esac        
