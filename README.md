@@ -23,6 +23,10 @@ The Ubuntu version is derived from the file: '/etc/os-release'
 The Linux kernel version is derived from the file: '/proc/version'
 
 Release Notes:
+October, 2018
+* v1.1.1
+* Add support for JetPack 4.1 (L4T 31.0.2)
+
 September, 2018
 * v1.1
 * Add support for JetPack 3.3 (L4T 28.2.1)
