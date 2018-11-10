@@ -2,7 +2,7 @@
 This repository holds utilities for working with NVIDIA Jetson Development Kit
 
 # jetsonInfo
-Get information about the NVIDIA Jetson OS environment on NVIDIA Jetson Development Kits (TK1, TX1, TX2, Xavier)
+Get information about the NVIDIA Jetson OS environment on NVIDIA Jetson Development Kits (TK1, TX1, TX2, AGX Xavier)
 
 The information about the NVIDIA Jetson Development Kit operating system is spread over a few files. This is a handy tool to use for reference.
 
@@ -23,6 +23,10 @@ The Ubuntu version is derived from the file: '/etc/os-release'
 The Linux kernel version is derived from the file: '/proc/version'
 
 Release Notes:
+November, 2018
+* v1.1.2
+* Add support for JetPack 4.1.1 (L4T 31.1.0)
+
 October, 2018
 * v1.1.1
 * Add support for JetPack 4.1 (L4T 31.0.2)
