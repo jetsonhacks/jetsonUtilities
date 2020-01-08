@@ -30,28 +30,7 @@ proc.communicate()
 print(" NVIDIA Jetson " + os.environ["JETSON_BOARD"].strip())
 
 #L4T Version
-if os.path.exists('/etc/nv_tegra_release'):
-    with open('/etc/nv_tegra_release','r') as l4tVersionFile:
-        l4tVersionFileText=l4tVersionFile.read()
-    textLines=l4tVersionFileText.splitlines() 
-    l4tVersionInfo=textLines[0].split(',')
-    for entry in l4tVersionInfo:
-        if 'release' in entry: 
-            # Example: '# R24 (release)'
-            l4tRelease=entry.split(' ')[1]
-            l4tRelease=filter(str.isdigit,l4tRelease)
-        elif 'REVISION' in entry:
-            # Example: 'REVISION: 2.1'
-            l4tRevision=entry.split(' ')[2]
-        elif 'BOARD' in entry:
-            # Example: 'BOARD: t210ref'
-            board=entry.split(' ')[2]
-    print(' L4T ' + l4tRelease + '.' + l4tRevision + ' [ JetPack ' +os.environ['JETSON_JETPACK'].strip()+' ]')
-    print(' Board: ' + board)
-else:
-    print(terminalColors.FAIL + 'Error: Unable to find L4T Version'  + terminalColors.ENDC)
-    print('Reason: Unable to find file /etc/nv_tegra_release')
-
+print(' L4T ' + os.environ['JETSON_L4T'].strip() + ' [ JetPack ' +os.environ['JETSON_JETPACK'].strip()+' ]')
 # Ubuntu version
 if os.path.exists('/etc/os-release'):
     with open('/etc/os-release', 'r') as ubuntuVersionFile:
