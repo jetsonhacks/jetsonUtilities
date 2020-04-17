@@ -27,7 +27,7 @@ for line in proc.stdout:
 proc.communicate()
 
 # Jetson Model
-print(" NVIDIA Jetson " + os.environ["JETSON_BOARD"].strip())
+print(" NVIDIA Jetson " + os.environ["JETSON_TYPE"].strip())
 
 #L4T Version
 print(' L4T ' + os.environ['JETSON_L4T'].strip() + ' [ JetPack ' +os.environ['JETSON_JETPACK'].strip()+' ]')
