@@ -12,7 +12,7 @@ $ python jetsonInfo.py
 
 or
 
-$ ./jetsonInfo.py
+$ ./jetsonInfo.py 
 
 The hardware designator is derived from the file: '/proc/cpuinfo'
 
@@ -22,7 +22,16 @@ The Ubuntu version is derived from the file: '/etc/os-release'
 
 The Linux kernel version is derived from the file: '/proc/version'
 
+Thank you Raffaello Bonghi @rbonghi for jetson_variables and jetson_libraries scripts
+
 Release Notes:
+
+July, 2020
+* v2.1
+* Add support for JetPack 4.4
+* Fix issue with TX1/Nano identification
+  Thank you Manu Seth! @mseth10
+* Update to @rbonghi jetson_libraries and jetson_variables
 
 January, 2020
 * v2.0

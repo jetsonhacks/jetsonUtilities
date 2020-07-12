@@ -19,3 +19,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--------------
+
+
+jetson_variables.sh
+See scripts/jetson_variables.sh for full copyright info
+Copyright (c) 2020 Raffaello Bonghi.
+Part of the jetson_stats package (https://github.com/rbonghi/jetson_stats or http://rnext.it).
+
