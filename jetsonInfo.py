@@ -56,7 +56,7 @@ else:
 command1 = ['bash', '-c', 'source scripts/jetson_libraries.sh && env']
 
 proc1 = subprocess.Popen(command1, stdout = subprocess.PIPE)
-environment_vars = {}
+# environment_vars = {}
 for line in proc1.stdout:
   (key, _, value) = line.partition("=")
   environment_vars[key] = value
