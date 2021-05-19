@@ -19,8 +19,8 @@ command = ['bash', '-c', 'source scripts/jetson_variables.sh && env']
 proc = subprocess.Popen(command, stdout = subprocess.PIPE)
 environment_vars = {}
 for line in proc.stdout:
-  (key, _, value) = line.partition("=")
-  environment_vars[key] = value
+  (key, _, value) = line.partition(b"=")
+  environment_vars[key.decode()] = value.decode()
 
 proc.communicate() 
 
@@ -58,8 +58,8 @@ command1 = ['bash', '-c', 'source scripts/jetson_libraries.sh && env']
 proc1 = subprocess.Popen(command1, stdout = subprocess.PIPE)
 # environment_vars = {}
 for line in proc1.stdout:
-  (key, _, value) = line.partition("=")
-  environment_vars[key] = value
+  (key, _, value) = line.partition(b"=")
+  environment_vars[key.decode()] = value.decode()
 
 
 
