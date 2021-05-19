@@ -12,6 +12,10 @@ $ python jetsonInfo.py
 ```
 or
 ```
+$ python3 jetsonInfo.py
+```
+or
+```
 $ ./jetsonInfo.py 
 ```
 The hardware designator is derived from the file: '/proc/cpuinfo'
@@ -24,40 +28,47 @@ The Linux kernel version is derived from the file: '/proc/version'
 
 Thank you Raffaello Bonghi @rbonghi for jetson_variables and jetson_libraries scripts
 
-Release Notes:
+### Release Notes:
 
-July, 2020
+### May, 2021
+* v2.2
+* Add support for JetPack 4.5
+* Add support for Python3 - Thank you Patti Vacek! @pattivacek
+* Add Vulcan version
+* Update to @rbonghi jetson_variables
+
+### July, 2020
 * v2.1
 * Add support for JetPack 4.4
 * Fix issue with TX1/Nano identification
   Thank you Manu Seth! @mseth10
 * Update to @rbonghi jetson_libraries and jetson_variables
 
-January, 2020
+### January, 2020
 * v2.0
 * Add support for JetPack 4.3
 
-November, 2018
+### November, 2018
 * v1.1.2
 * Add support for JetPack 4.1.1 (L4T 31.1.0)
 
-October, 2018
+### October, 2018
 * v1.1.1
 * Add support for JetPack 4.1 (L4T 31.0.2)
 
-September, 2018
+### September, 2018
 * v1.1
 * Add support for JetPack 3.3 (L4T 28.2.1)
 * Add support for Jetson AGX Xavier
 * Add support for JetPack 4.0 (L4T 31.0.1)
 
-July, 2018
+### July, 2018
 * v1.0
 * Add support for JetPack 3.2.1 (L4T 28.2.1)
 
-The shell script jetson_variables is derived from jetson_easy: https://github.com/rbonghi/jetson_easy
+Original shell script jetson_variables is derived from jetson_easy: https://github.com/rbonghi/jetson_easy ; Now in jtop package
 
-Copyright (c) 2015-2020 Raffaello Bonghi
+Copyright (c) 2015-2021 Raffaello Bonghi
 
 See license for jetson_easy in scripts folder
 
