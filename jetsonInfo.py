@@ -71,5 +71,6 @@ print(' CUDNN: ' + environment_vars['JETSON_CUDNN'].strip())
 print(' TensorRT: ' + environment_vars['JETSON_TENSORRT'].strip())
 print(' Vision Works: ' + environment_vars['JETSON_VISIONWORKS'].strip())
 print(' VPI: ' + environment_vars['JETSON_VPI'].strip())
+print(' Vulcan: ' + environment_vars['JETSON_VULKAN_INFO'].strip())
 
 
