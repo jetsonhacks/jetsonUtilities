@@ -30,6 +30,11 @@ Thank you Raffaello Bonghi @rbonghi for jetson_variables and jetson_libraries sc
 
 ### Release Notes:
 
+### August, 2021
+* v2.3
+* Add support for JetPack 4.6
+* Update to @rbonghi jetson_variables
+
 ### May, 2021
 * v2.2
 * Add support for JetPack 4.5
