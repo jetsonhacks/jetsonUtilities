@@ -26,5 +26,8 @@ SOFTWARE.
 jetson_variables.sh
 See scripts/jetson_variables.sh for full copyright info
 Copyright (c) 2020 Raffaello Bonghi.
+jetson_libraries.sh
+See scripts/jetson_libraries.sh for full copyright info
+Copyright (c) 2020 Raffaello Bonghi.
 Part of the jetson_stats package (https://github.com/rbonghi/jetson_stats or http://rnext.it).
 
