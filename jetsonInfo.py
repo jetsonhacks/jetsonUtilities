@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # MIT License
-# Copyright (c) 2017-2018 Jetsonhacks
+# Copyright (c) 2017-2022 Jetsonhacks
 # Please see accompanying license information
 from __future__ import print_function
 import os,sys
