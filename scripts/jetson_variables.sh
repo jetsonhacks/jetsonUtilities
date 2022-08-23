@@ -1,6 +1,6 @@
 #!/bin/bash
 # This file is part of the jetson_stats package (https://github.com/rbonghi/jetson_stats or http://rnext.it).
-# Copyright (c) 2020-21 Raffaello Bonghi.
+# Copyright (c) 2020 Raffaello Bonghi.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -30,8 +30,13 @@ jetson_jetpack()
     local JETSON_L4T=$1
     local JETSON_JETPACK=""
     case $JETSON_L4T in
+        "35.1.0") JETSON_JETPACK="5.0.2" ;;
+        "34.1.1") JETSON_JETPACK="5.0.1 DP" ;;
+        "34.1.0") JETSON_JETPACK="5.0 DP" ;;
+        "32.7.2") JETSON_JETPACK="4.6.2" ;;
+        "32.7.1") JETSON_JETPACK="4.6.1" ;;
         "32.6.1") JETSON_JETPACK="4.6" ;;
-        "32.5.1") JETSON_JETPACK="4.5.1" ;;
+        "32.5.1" | "32.5.2") JETSON_JETPACK="4.5.1" ;;
         "32.5.0" | "32.5") JETSON_JETPACK="4.5" ;;
         "32.4.4") JETSON_JETPACK="4.4.1" ;;
         "32.4.3") JETSON_JETPACK="4.4" ;;
@@ -63,46 +68,13 @@ jetson_jetpack()
     # return type jetpack
     echo $JETSON_JETPACK
 }
+###########################
 
-###########################
-####  BOARD DETECTION  ####
-###########################
-# Detection NVIDIA Jetson
-# Jetson TK1 can be detected with chip id
-# Reference:
-# 1. https://docs.nvidia.com/jetson/l4t/index.html (Devices Supported by This Document)
-# 2. https://github.com/rbonghi/jetson_stats/issues/48
-# 3. https://github.com/rbonghi/jetson_stats/issues/57
-jetson_board()
-{
-    local JETSON_CHIP_ID=$1
-    local JETSON_BOARD=$2
-    local JETSON_TYPE=""
-    # Detection jetson board
-    case $JETSON_BOARD in
-        *2180*) JETSON_TYPE="TX1" ;;
-        P3310*) JETSON_TYPE="TX2" ;;
-        P3489-0080*) JETSON_TYPE="TX2 4GB" ;;
-        P3489*) JETSON_TYPE="TX2i" ;;
-        P2888-0006*) JETSON_TYPE="AGX Xavier [8GB]" ;;
-        P2888-0001*|P2888-0004*) JETSON_TYPE="AGX Xavier [16GB]" ;;
-        P2888*) JETSON_TYPE="AGX Xavier [32GB]" ;;
-        P3448-0002*) JETSON_TYPE="Nano" ;;
-        P3448*) JETSON_TYPE="Nano (Developer Kit Version)" ;;
-        P3668-0001*) JETSON_TYPE="Xavier NX" ;;
-        P3668*) JETSON_TYPE="Xavier NX (Developer Kit Version)" ;;
-        *) JETSON_TYPE="" ;;
-    esac
-    # if JETSON_TYPE empty, check CHIP_ID for jetson TK1
-    if [ -z "$JETSON_TYPE" ] ; then
-        if [ "$JETSON_CHIP_ID" == "64" ] ; then
-            JETSON_TYPE="TK1"
-        fi
-    fi
-    # Return board name
-    echo $JETSON_TYPE
-}
-###########################
+JETSON_MODEL="UNKNOWN"
+# Extract jetson model name
+if [ -f /sys/firmware/devicetree/base/model ]; then
+    JETSON_MODEL=$(tr -d '\0' < /sys/firmware/devicetree/base/model)
+fi
 
 # Extract jetson chip id
 JETSON_CHIP_ID=""
@@ -123,9 +95,8 @@ fi
 
 # Code name
 JETSON_CODENAME=""
-JETSON_TYPE="UNKNOWN"
 JETSON_MODULE="UNKNOWN"
-JETSON_BOARD="UNKNOWN"
+JETSON_CARRIER="UNKNOWN"
 list_hw_boards()
 {
     # Extract from DTS the name of the boards available
@@ -135,18 +106,15 @@ list_hw_boards()
     local s=$1
     local regex='p([0-9-]+)' # Equivalent to p([\d-]*-)
     while [[ $s =~ $regex ]]; do
-        local board_name=$(echo "P${BASH_REMATCH[1]::-1}")
-        #echo $board_name
+        local board_name=$(echo "P${BASH_REMATCH[1]}" | sed 's/-*$//' )
         # Load jetson type
-        JETSON_TYPE=$(jetson_board $JETSON_CHIP_ID $board_name)
         # If jetson type is not empty the module name is the same
-        if [ ! -z "$JETSON_TYPE" ] ; then
+        if [ $JETSON_MODULE = "UNKNOWN" ] ; then
             JETSON_MODULE=$board_name
-            echo "JETSON_TYPE=\"$JETSON_TYPE\""
             echo "JETSON_MODULE=\"$JETSON_MODULE\""
         else
-            JETSON_BOARD=$board_name
-            echo "JETSON_BOARD=\"$JETSON_BOARD\""
+            JETSON_CARRIER=$board_name
+            echo "JETSON_CARRIER=\"$JETSON_CARRIER\""
         fi
         # Find next match
         s=${s#*"${BASH_REMATCH[1]}"}
@@ -167,29 +135,24 @@ if [ -f /proc/device-tree/nvidia,dtsfilename ]; then
     eval $(list_hw_boards "$JETSON_DTS")
 fi
 
-# Print description
-JETSON_MACHINE=""
-if [ ! -z "$JETSON_TYPE" ] ; then
-    JETSON_MACHINE="NVIDIA Jetson $JETSON_TYPE"
-fi
 # Export variables
+export JETSON_MODEL
 export JETSON_CHIP_ID
 export JETSON_SOC
 export JETSON_BOARDIDS
 export JETSON_CODENAME
 export JETSON_MODULE
-export JETSON_BOARD
-export JETSON_TYPE
-export JETSON_MACHINE
+export JETSON_CARRIER
 
 # Write CUDA architecture
 # https://developer.nvidia.com/cuda-gpus
 # https://devtalk.nvidia.com/default/topic/988317/jetson-tx1/what-should-be-the-value-of-cuda_arch_bin/
-case $JETSON_TYPE in
+case $JETSON_MODEL in
+    *Orin*) JETSON_CUDA_ARCH_BIN="8.7" ;;
     *Xavier*) JETSON_CUDA_ARCH_BIN="7.2" ;;
-    TX2*) JETSON_CUDA_ARCH_BIN="6.2" ;;
-    TX1* | Nano*) JETSON_CUDA_ARCH_BIN="5.3" ;;
-    TK1) JETSON_CUDA_ARCH_BIN="3.2" ;;
+    *TX2*) JETSON_CUDA_ARCH_BIN="6.2" ;;
+    *TX1* | *Nano*) JETSON_CUDA_ARCH_BIN="5.3" ;;
+    *TK1*) JETSON_CUDA_ARCH_BIN="3.2" ;;
     * ) JETSON_CUDA_ARCH_BIN="NONE" ;;
 esac
 # Export Jetson CUDA ARCHITECTURE
