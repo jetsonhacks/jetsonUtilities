@@ -16,7 +16,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
-# TODO Add enviroments variables:
+# TODO Add environments variables:
 # - UID -> https://devtalk.nvidia.com/default/topic/996988/jetson-tk1/chip-uid/post/5100481/#5100481
 # - GCID, BOARD, EABI
 
